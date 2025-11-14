@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scan to Start Celebration</title>
+  <style>
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;
+         display:flex;align-items:center;justify-content:center;height:100vh;
+         background:linear-gradient(135deg,#ffd6e8,#ffb3d9);text-align:center;padding:20px}
+    .card{background:rgba(255,255,255,0.9);padding:24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+    h1{color:#b30059;margin:0 0 12px 0}
+    p{color:#660033;margin:0 0 16px 0}
+    img{width:250px;max-width:70%}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎀 Scan to Start the Celebration</h1>
+    <p>Scan this QR with your phone camera</p>
+
+    <!-- Replace YOUR_WELCOME_URL with the full URL to welcome.html after you host -->
+    <img id="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=C:\Users\Admin\Desktop\birthday celebration\index.html" alt="QR Code">
+
+    <!-- <p style="font-size:12px;color:#999;margin-top:12px">Tip: Replace the QR image link's data= with your hosted welcome.html URL</p> -->
+  </div>
+</body>
+</html>

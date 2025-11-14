@@ -1,90 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Welcome</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Welcome — Start Celebration</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #ffdae8, #ffb3d9);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .box {
-        max-width: 90%;
-    }
-
-    h1 {
-        font-size: 36px;
-        color: #b30059;
-        margin-bottom: 10px;
-        animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-        from { text-shadow: 0 0 5px #fff; }
-        to   { text-shadow: 0 0 15px #ff66b3; }
-    }
-
-    p {
-        font-size: 18px;
-        color: #660033;
-        margin-bottom: 30px;
-    }
-
-    button {
-        padding: 15px 30px;
-        background: #ff4da6;
-        color: white;
-        font-size: 20px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    button:hover {
-        background: #ff1a8c;
-        transform: scale(1.05);
-    }
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;
+       display:flex;align-items:center;justify-content:center;height:100vh;
+       background:linear-gradient(135deg,#ffdae8,#ffb3d9);text-align:center;padding:20px}
+  .box{max-width:92%;padding:24px;border-radius:14px}
+  h1{color:#b30059;margin-bottom:8px}
+  p{color:#660033;margin-bottom:20px}
+  button{background:#ff4da6;color:#fff;border:none;padding:14px 26px;border-radius:10px;
+         font-size:18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+  button:active{transform:scale(.99)}
+  /* small control (visible if user wants) */
+  #audioControl{position:fixed;right:14px;bottom:14px;padding:8px 12px;border-radius:10px;border:none;background:#ff4da6;color:#fff;cursor:pointer;z-index:9999}
 </style>
 </head>
 <body>
 
 <div class="box">
-    <h1>🎀 A Special Surprise 🎀</h1>
-    <p>Made with love for my sweet sister 💗</p>
+  <h1>🎀 A Special Surprise 🎀</h1>
+  <p>Made with love for my sweet sister 💗</p>
 
-    <button onclick="startCelebration()">Start Celebration 🎉</button>
+  <button id="startBtn">Start Celebration 🎉</button>
 </div>
 
-<!-- Use MP3 (works everywhere) -->
-<audio id="startMusic">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f3a6fe379.mp3?filename=happy-birthday-to-you-132755.mp3" type="audio/mpeg">
+<!-- Audio (same file used on all pages) -->
+<audio id="bgMusic" preload="auto">
+  <source src="music/happy-birthday-254480.mp3" type="audio/mpeg">
 </audio>
 
+<!-- small persistent control (works after click) -->
+<button id="audioControl" style="display:none">Pause Music</button>
+
 <script>
-function startCelebration() {
-    const music = document.getElementById("startMusic");
+(function(){
+  const btn = document.getElementById('startBtn');
+  const audio = document.getElementById('bgMusic');
+  const control = document.getElementById('audioControl');
 
-    // Play music (mobile & desktop supported)
-    music.play().catch(error => {
-        console.log("Play blocked, retrying...");
-        music.play();
-    });
+  // Start celebration: play, save flag, and go to second page
+  btn.addEventListener('click', async () => {
+    audio.volume = 1.0;
+    try {
+      await audio.play();                 // user gesture -> allowed
+      audio.loop = true;
+      localStorage.setItem('musicPlaying','yes');
+      control.style.display = 'inline-block';
+      control.textContent = 'Pause Music';
+    } catch(e) {
+      console.warn('Play failed', e);
+    }
+    // small delay so music begins before navigation
+    setTimeout(()=> location.href = 'second.html', 700);
+  });
 
-    // Redirect after 1 second
-    setTimeout(() => {
-        window.location.href = "second.html";
-    }, 1000);
-}
+  // Audio control (pause/resume)
+  control.addEventListener('click', () => {
+    if (!audio.paused) {
+      audio.pause();
+      localStorage.setItem('musicPlaying','no');
+      control.textContent = 'Play Music';
+    } else {
+      audio.play().then(()=>{
+        localStorage.setItem('musicPlaying','yes');
+        control.textContent = 'Pause Music';
+      }).catch(()=> control.textContent = 'Tap to Play');
+    }
+  });
+
+  // If user already started music earlier and is back on this page
+  if (localStorage.getItem('musicPlaying') === 'yes') {
+    control.style.display = 'inline-block';
+    control.textContent = 'Pause Music';
+  }
+})();
 </script>
 
 </body>
