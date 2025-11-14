@@ -62,21 +62,25 @@
     <h1>🎀 A Special Surprise 🎀</h1>
     <p>Made with love for my sweet sister 💗</p>
 
-    <!-- Button triggers music + redirect -->
     <button onclick="startCelebration()">Start Celebration 🎉</button>
 </div>
 
-<!-- Hidden audio -->
+<!-- Use MP3 (works everywhere) -->
 <audio id="startMusic">
-    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/ImperialMarch60.wav">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f3a6fe379.mp3?filename=happy-birthday-to-you-132755.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 function startCelebration() {
-    let music = document.getElementById("startMusic");
-    music.play();  // Play music on click
+    const music = document.getElementById("startMusic");
 
-    // Wait 1 second then go to message page
+    // Play music (mobile & desktop supported)
+    music.play().catch(error => {
+        console.log("Play blocked, retrying...");
+        music.play();
+    });
+
+    // Redirect after 1 second
     setTimeout(() => {
         window.location.href = "second.html";
     }, 1000);
