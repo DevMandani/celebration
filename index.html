@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffdae8, #ffb3d9);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .box {
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #b30059;
+        margin-bottom: 10px;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #fff; }
+        to   { text-shadow: 0 0 15px #ff66b3; }
+    }
+
+    p {
+        font-size: 18px;
+        color: #660033;
+        margin-bottom: 30px;
+    }
+
+    button {
+        padding: 15px 30px;
+        background: #ff4da6;
+        color: white;
+        font-size: 20px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff1a8c;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h1>🎀 A Special Surprise 🎀</h1>
+    <p>Made with love for my sweet sister 💗</p>
+
+    <!-- Button triggers music + redirect -->
+    <button onclick="startCelebration()">Start Celebration 🎉</button>
+</div>
+
+<!-- Hidden audio -->
+<audio id="startMusic">
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/ImperialMarch60.wav">
+</audio>
+
+<script>
+function startCelebration() {
+    let music = document.getElementById("startMusic");
+    music.play();  // Play music on click
+
+    // Wait 1 second then go to message page
+    setTimeout(() => {
+        window.location.href = "second.html";
+    }, 1000);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Celebration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(135deg, #ff99cc, #ffb3e6);
+        overflow: hidden;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-top: 80px;
+        font-size: 40px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 60px;
+        animation: float 6s infinite ease-in;
+    }
+
+    @keyframes float {
+        from { transform: translateY(0); opacity: 1; }
+        to   { transform: translateY(-900px); opacity: 0; }
+    }
+
+    @media(max-width:600px){
+        h1 { font-size: 30px; }
+        .balloon { width: 45px; }
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 Happy Birthday Dear Sister 🎉</h1>
+
+<audio autoplay loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars3.wav">
+</audio>
+
+<script>
+function createBalloon() {
+    const b = document.createElement("img");
+    b.src = "https://cdn-icons-png.flaticon.com/512/634/634634.png";
+    b.className = "balloon";
+    b.style.left = Math.random() * window.innerWidth + "px";
+    b.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 7000);
+}
+setInterval(createBalloon, 500);
+</script>
+
+</body>
+</html>
