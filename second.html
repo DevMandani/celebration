@@ -3,59 +3,83 @@
 <head>
 <title>Birthday Message</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-    body {margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ffe6f2,#ffb3d9);text-align:center;padding:60px 20px;overflow:hidden}
-    h1{font-size:36px;color:#c2185b;animation:fade 2s infinite alternate;z-index:10;position:relative}
-    @keyframes fade{from{opacity:.6}to{opacity:1}}
-    p{max-width:90%;margin:auto;font-size:18px;color:#880e4f;line-height:1.6;margin-top:20px;position:relative;z-index:10}
-    a{display:inline-block;margin-top:40px;padding:15px 30px;background:#d81b60;color:white;font-size:18px;border-radius:12px;text-decoration:none;transition:.3s;position:relative;z-index:10}
-    a:hover{background:#ad1457;transform:scale(1.05)}
-    /* subtle sparkle background using pseudo-elements */
-    .spark { position: fixed; inset:0; pointer-events:none; z-index:1; background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 30px 30px; opacity:0.9; mix-blend-mode: screen; }
-    #audioControl{position:fixed;right:14px;bottom:14px;padding:8px 12px;border-radius:10px;border:none;background:#ff4da6;color:#fff;cursor:pointer;z-index:9999}
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffe6f2, #ffb3d9);
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #c2185b;
+        animation: fade 2s infinite alternate;
+    }
+
+    @keyframes fade {
+        from { opacity: 0.6; }
+        to   { opacity: 1; }
+    }
+
+    p {
+        max-width: 90%;
+        margin: auto;
+        font-size: 18px;
+        color: #880e4f;
+        line-height: 1.6;
+        margin-top: 20px;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 15px 30px;
+        background: #d81b60;
+        color: white;
+        font-size: 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        background: #ad1457;
+        transform: scale(1.05);
+    }
 </style>
+
 </head>
 <body>
-
-<div class="spark"></div>
 
 <h1>💗 Happy Birthday Sister 💗</h1>
 
 <p>
 You are not just my sister — you are my best friend,<br>
 my happiness, my strength, and my biggest supporter.<br>
-May this year bring you endless joy and surprises! 💖
+May this year bring you all the joy, love, and surprises you deserve! 💖
 </p>
 
 <a href="third.html">Continue 🎊</a>
 
-<!-- audio same file -->
+<!-- FIXED AUDIO — using same file as Page 1 -->
 <audio id="bgMusic" preload="auto">
   <source src="music/happy-birthday-254480.mp3" type="audio/mpeg">
 </audio>
 
-<button id="audioControl" style="display:none">Pause Music</button>
-
 <script>
-(function(){
-  const audio=document.getElementById('bgMusic');
-  const control=document.getElementById('audioControl');
+window.addEventListener("load", () => {
+    const audio = document.getElementById("bgMusic");
 
-  // If music was started earlier, continue playing
-  if (localStorage.getItem('musicPlaying')==='yes') {
-    audio.volume=1.0;
-    audio.loop=true;
-    audio.play().then(()=>{ control.style.display='inline-block'; control.textContent='Pause Music'; }).catch(()=>{ /* autoplay blocked sometimes */ });
-  }
-
-  control.addEventListener('click', ()=>{
-    if (!audio.paused) { audio.pause(); localStorage.setItem('musicPlaying','no'); control.textContent='Play Music'; }
-    else { audio.play().then(()=>{ localStorage.setItem('musicPlaying','yes'); control.textContent='Pause Music'; }).catch(()=>control.textContent='Tap to Play'); }
-  });
-
-  // Show control if flag says music playing
-  if (localStorage.getItem('musicPlaying')==='yes') { control.style.display='inline-block'; control.textContent='Pause Music'; }
-})();
+    if (localStorage.getItem("musicPlaying") === "yes") {
+        audio.volume = 1.0;
+        audio.play().catch(() => {
+            console.log("Autoplay blocked. User must tap once.");
+        });
+    }
+});
 </script>
 
 </body>
