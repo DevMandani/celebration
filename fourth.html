@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>More Memories</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+        background: linear-gradient(135deg, #ff9ac9, #ffd6e7);
+        font-family: "Poppins", sans-serif;
+        color: #680842;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-top: 20px;
+        animation: fadeIn 2s ease-in-out;
+        color: white;
+        text-shadow: 0 0 10px #ff5ac1;
+    }
+
+    p {
+        max-width: 90%;
+        margin: auto;
+        line-height: 1.8;
+        font-size: 18px;
+        animation: fadeIn 2s ease-in-out;
+        color: #fff;
+    }
+
+    /* ❤️ Heartbeat Animation */
+    @keyframes heartbeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.08); }
+        40% { transform: scale(1); }
+        60% { transform: scale(1.08); }
+        100% { transform: scale(1); }
+    }
+
+    .photo-gallery {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .photo-gallery img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 25px;
+        animation: heartbeat 2.2s infinite;
+        box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Fade In Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+</style>
+</head>
+<body>
+
+<h1>💖 More Beautiful Moments 💖</h1>
+
+<p>
+These moments hold a special place in my heart.  
+Every picture is a reminder of how wonderful you truly are.  
+Keep shining, keep smiling, and keep spreading love! ✨
+</p>
+
+<!-- ❤️ Heartbeat Photo Animation -->
+<div class="photo-gallery">
+    <img src="images/image3.jpg" alt="Memory A">
+    <img src="images/image1.jpg" alt="Memory B">
+    <img src="images/image2.jpg" alt="Memory C">
+</div>
+
+<!-- Audio (continues from previous pages) -->
+<audio id="bgMusic" preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.addEventListener("load", () => {
+    const audio = document.getElementById("bgMusic");
+
+    if (localStorage.getItem("musicPlaying") === "yes") {
+        audio.volume = 1.0;
+        audio.play().catch(() => {});
+    }
+});
+</script>
+
+</body>
+</html>
