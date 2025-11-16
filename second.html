@@ -121,7 +121,7 @@ window.addEventListener("load", () => {
     const audio = document.getElementById("bgMusic");
 
     if (localStorage.getItem("musicPlaying") === "yes") {
-        audio.volume = 1.0;
+        audio.volume = 2.0;
         audio.play().catch(() => {
             console.log("Autoplay blocked.");
         });
@@ -131,3 +131,4 @@ window.addEventListener("load", () => {
 
 </body>
 </html>
+
