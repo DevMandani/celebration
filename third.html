@@ -138,7 +138,7 @@
             const audio = document.getElementById("bgMusic");
 
             if (localStorage.getItem("musicPlaying") === "yes") {
-                audio.volume = 2.0;
+                audio.volume = 1.0;
                 audio.play().catch(() => {});
             }
         });
