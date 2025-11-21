@@ -23,25 +23,46 @@
             animation: fadeIn 2s ease-out;
         }
 
-        .images {
+        .photos-section {
             margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
         }
 
-        .images img {
-            width: 80%;
+        /* 3D PHOTO CARD */
+        .photo-card {
+            width: 85%;
             max-width: 350px;
+            margin: 25px auto;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 0, 123, 0.35);
+            transform: perspective(900px) rotateY(0deg);
+            transition: 0.6s ease;
+            animation: fadeIn 1.3s ease-out;
+        }
+
+        .photo-card:hover {
+            transform: perspective(900px) rotateY(15deg) scale(1.03);
+        }
+
+        .photo-card img {
+            width: 100%;
             border-radius: 20px;
             box-shadow: 0 0 20px rgba(255, 79, 168, 0.7);
-            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* STORY TEXT */
+        .story {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #fff;
+            text-shadow: 0px 0px 5px #ff4fa8;
+            animation: fadeIn 2s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
         }
 
         /* 🎭 REAL THEATER CURTAINS */
@@ -90,7 +111,6 @@
 
         @media (max-width: 600px) {
             h1 { font-size: 1.9rem; }
-            .images img { width: 90%; }
         }
     </style>
 </head>
@@ -103,10 +123,35 @@
 
     <h1>🎉 Happy Birthday Dear jayshree Didu! 🎂💖</h1>
 
-    <div class="images">
-        <img src="images/image3.jpg" alt="Photo 1">
-        <img src="images/image1.jpg" alt="Photo 2">
-        <img src="images/image2.jpg" alt="Photo 3">
+    <div class="photos-section">
+
+        <!-- PHOTO 1 -->
+        <div class="photo-card">
+            <img src="images/image3.jpg" alt="Photo 1">
+            <div class="story">
+                🌸 _“Every smile of yours feels like sunshine…  
+                and every memory with you feels like home.”_
+            </div>
+        </div>
+
+        <!-- PHOTO 2 -->
+        <div class="photo-card">
+            <img src="images/image1.jpg" alt="Photo 2">
+            <div class="story">
+                ✨ _“You are not just my sister…  
+                you are my happiness, my strength, my favourite story.”_
+            </div>
+        </div>
+
+        <!-- PHOTO 3 -->
+        <div class="photo-card">
+            <img src="images/image2.jpg" alt="Photo 3">
+            <div class="story">
+                💖 _“If life gave me a chance to choose a sister again,  
+                I would choose you every single time.”_
+            </div>
+        </div>
+
     </div>
 
     <!-- 🎉 CONFETTI EFFECT -->
@@ -136,7 +181,6 @@
     <script>
         window.addEventListener("load", () => {
             const audio = document.getElementById("bgMusic");
-
             if (localStorage.getItem("musicPlaying") === "yes") {
                 audio.volume = 1.0;
                 audio.play().catch(() => {});
